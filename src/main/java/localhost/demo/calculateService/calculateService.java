@@ -1,5 +1,9 @@
 package localhost.demo.calculateService;
 
+
+import org.springframework.stereotype.Service;
+
+@Service
 public class calculateService implements calculateServiceInterface {
 
     @Override

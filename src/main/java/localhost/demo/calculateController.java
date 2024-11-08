@@ -1,6 +1,8 @@
 package localhost.demo;
 
 import localhost.demo.calculateService.calculateService;
+import localhost.demo.calculateService.calculateServiceInterface;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,10 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/calculator")
 public class calculateController {
-    private final calculateService service;
 
-    public calculateController() {
-        service = new calculateService();
+    private final calculateServiceInterface service;
+
+    public calculateController(calculateServiceInterface calculateService) {
+        service = calculateService;
     }
 
     @GetMapping
