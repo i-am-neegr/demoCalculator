@@ -2,11 +2,11 @@ package localhost.demo;
 
 import localhost.demo.calculateService.calculateService;
 import localhost.demo.calculateService.calculateServiceInterface;
+import localhost.demo.exception.IllegalArgumentCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/calculator")
@@ -46,4 +46,10 @@ public class calculateController {
                          @RequestParam(value = "num2", required = false) String num2) {
         return service.divide(num1, num2);
     }
+
+    @ExceptionHandler(IllegalArgumentCalculator.class)
+    public ResponseEntity handleIllegalArgumentException(IllegalArgumentCalculator calculator) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
 }
